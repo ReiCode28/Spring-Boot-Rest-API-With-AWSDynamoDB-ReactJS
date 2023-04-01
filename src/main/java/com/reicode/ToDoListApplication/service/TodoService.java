@@ -1,16 +1,16 @@
 package com.reicode.ToDoListApplication.service;
 
 import com.reicode.ToDoListApplication.model.TodoItem;
+import com.reicode.ToDoListApplication.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
 
 public class TodoService {
 
     @Autowired
     private TodoRepository todoRepository;
 
-    public List<TodoItem> getAllTodoItems() {
+    public Iterable<TodoItem> getAllTodoItems() {
         return todoRepository.findAll();
     }
 
