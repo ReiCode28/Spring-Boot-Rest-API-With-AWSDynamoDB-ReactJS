@@ -6,15 +6,12 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.domain.Persistable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @DynamoDBTable(tableName = "TodoItem")
-public class ToDoItem {
+public class TodoItem {
 
     @DynamoDBHashKey(attributeName = "id")
     private String id;
@@ -27,5 +24,4 @@ public class ToDoItem {
 
     @DynamoDBAttribute(attributeName = "completed")
     private boolean completed;
-
 }
