@@ -1,7 +1,7 @@
 Todo List Application
 =====================
 
-This is the backend for a Todo List application that allows users to create, read, update, and delete tasks. The application is built using Spring Boot and DynamoDB. The frontend will be built using React.js
+Welcome to my project! This is the backend for a Todo List application that allows users to create, read, update, and delete tasks. The application is built using Spring Boot and DynamoDB. The frontend will be built using React.js. With this App, users can effortlessly manage their tasks and events, helping them stay organized and on top of their to-do list.
 
 Technologies Used
 -----------------
