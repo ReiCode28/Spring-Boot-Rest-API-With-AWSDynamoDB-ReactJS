@@ -4,15 +4,22 @@ import com.reicode.ToDoListApplication.model.TodoItem;
 import com.reicode.ToDoListApplication.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class TodoService {
 
     @Autowired
     private TodoRepository todoRepository;
 
-    public Iterable<TodoItem> getAllTodoItems() {
-        return todoRepository.findAll();
+    public List<TodoItem> getAllTodoItems() {
+        Iterable<TodoItem> todoItemsIterable = todoRepository.findAll();
+        List<TodoItem> todoItemsList = new ArrayList<>();
+        todoItemsIterable.forEach(todoItemsList::add);
+        return todoItemsList;
     }
+
 
     public void addTodoItem(TodoItem todoItem) {
         todoRepository.save(todoItem);
