@@ -55,7 +55,11 @@ Here are some examples of HTTP requests you can make to the API using Postman:
 
         jsonCopy code
 
-        `{ "title": "Buy groceries", "description": "Buy milk, eggs, and bread" }`
+        `{
+            "title": "Buy groceries",
+            "description": "Buy milk, bread, and eggs",
+            "completed": false
+         }`
 
 -   Get a task by ID:
     -   Method: GET
@@ -67,7 +71,11 @@ Here are some examples of HTTP requests you can make to the API using Postman:
 
         jsonCopy code
 
-        `{ "title": "Buy groceries", "description": "Buy milk, eggs, bread, and cheese" }`
+        `{
+    "title": "Buy groceries",
+    "description": "Buy milk, bread, and eggs",
+    "completed": true
+}`
 
 -   Delete a task by ID:
     -   Method: DELETE
