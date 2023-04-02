@@ -3,11 +3,12 @@ package com.reicode.ToDoListApplication.service;
 import com.reicode.ToDoListApplication.model.TodoItem;
 import com.reicode.ToDoListApplication.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Service
 public class TodoService {
 
     @Autowired

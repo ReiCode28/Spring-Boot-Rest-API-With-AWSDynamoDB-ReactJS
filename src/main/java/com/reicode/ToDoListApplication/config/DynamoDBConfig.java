@@ -14,7 +14,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 
 @Configuration
 @EnableDynamoDBRepositories
-        (basePackages = "com.ninja.RestAPISpringBootWithDynamoDB.repository")
+        (basePackages = "com.reicode.ToDoListApplication.repository")
 public class DynamoDBConfig {
 
     @Value("${amazon.dynamodb.endpoint}")

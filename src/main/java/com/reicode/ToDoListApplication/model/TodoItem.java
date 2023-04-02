@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@DynamoDBTable(tableName = "TodoItem")
+@DynamoDBTable(tableName = "todo")
 public class TodoItem {
 
     @DynamoDBHashKey(attributeName = "id")
