@@ -5,8 +5,8 @@ import com.reicode.ToDoListApplication.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TodoService {
@@ -15,22 +15,29 @@ public class TodoService {
     private TodoRepository todoRepository;
 
     public List<TodoItem> getAllTodoItems() {
-        Iterable<TodoItem> todoItemsIterable = todoRepository.findAll();
-        List<TodoItem> todoItemsList = new ArrayList<>();
-        todoItemsIterable.forEach(todoItemsList::add);
-        return todoItemsList;
+        return (List<TodoItem>) todoRepository.findAll();
+    }
+
+    public Optional<TodoItem> getTodoItemById(String id) {
+        return todoRepository.findById(id);
+    }
+
+    public TodoItem createTodoItem(TodoItem todoItem) {
+        return todoRepository.save(todoItem);
+    }
+
+    public TodoItem updateTodoItem(TodoItem todoItem) {
+        return todoRepository.save(todoItem);
     }
 
 
-    public void addTodoItem(TodoItem todoItem) {
-        todoRepository.save(todoItem);
-    }
 
-    public void updateTodoItem(TodoItem todoItem) {
-        todoRepository.save(todoItem);
-    }
 
     public void deleteTodoItem(String id) {
         todoRepository.deleteById(id);
     }
 }
+
+
+
+
