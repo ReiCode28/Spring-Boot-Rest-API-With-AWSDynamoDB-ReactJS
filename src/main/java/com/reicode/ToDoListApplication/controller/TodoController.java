@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/todo")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TodoController {
 
     private static final Logger logger = LoggerFactory.getLogger(TodoController.class);
