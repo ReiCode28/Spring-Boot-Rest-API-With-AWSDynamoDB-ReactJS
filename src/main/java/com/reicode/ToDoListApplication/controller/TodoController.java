@@ -1,43 +1,68 @@
 package com.reicode.ToDoListApplication.controller;
 
+import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
 import com.reicode.ToDoListApplication.model.TodoItem;
 import com.reicode.ToDoListApplication.service.TodoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/todo")
 public class TodoController {
 
+    private static final Logger logger = LoggerFactory.getLogger(TodoController.class);
+
     @Autowired
     private TodoService todoService;
 
     @GetMapping
-    public ResponseEntity<List<TodoItem>> getAllTodoItems() {
-        List<TodoItem> todoItems = todoService.getAllTodoItems();
-        return new ResponseEntity<>(todoItems, HttpStatus.OK);
+    public List<TodoItem> getAllTodoItems() {
+        return todoService.getAllTodoItems();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<TodoItem> getTodoItemById(@PathVariable String id) {
+        return todoService.getTodoItemById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Void> addTodoItem(@RequestBody TodoItem todoItem) {
-        todoService.addTodoItem(todoItem);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public TodoItem createTodoItem(@RequestBody TodoItem todoItem) {
+        logger.info("Received request to add todo item: {}", todoItem);
+
+        TodoItem addedTodoItem = todoService.createTodoItem(todoItem);
+        logger.info("Added todo item: {}", addedTodoItem);
+
+        return addedTodoItem;
     }
 
+
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateTodoItem(@PathVariable String id, @RequestBody TodoItem todoItem) {
-        todoItem.setId(id);
-        todoService.updateTodoItem(todoItem);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public TodoItem updateTodoItem(@PathVariable String id, @RequestBody TodoItem updatedTodoItem) {
+        Optional<TodoItem> todoItemOptional = todoService.getTodoItemById(id);
+        if (todoItemOptional.isPresent()) {
+            TodoItem todoItem = todoItemOptional.get();
+            todoItem.setDescription(updatedTodoItem.getDescription());
+            todoItem.setCompleted(updatedTodoItem.isCompleted());
+            return todoService.updateTodoItem(todoItem);
+        } else {
+            throw new ResourceNotFoundException("Todo item not found with id " + id);
+        }
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTodoItem(@PathVariable String id) {
         todoService.deleteTodoItem(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
+
+
+
