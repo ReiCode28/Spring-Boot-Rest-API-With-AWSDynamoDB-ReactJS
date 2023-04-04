@@ -30,14 +30,7 @@ public class TodoService {
         return todoRepository.save(todoItem);
     }
 
-
-
-
     public void deleteTodoItem(String id) {
         todoRepository.deleteById(id);
     }
 }
-
-
-
-
