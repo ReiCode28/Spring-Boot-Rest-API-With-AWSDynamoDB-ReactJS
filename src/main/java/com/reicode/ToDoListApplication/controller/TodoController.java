@@ -46,6 +46,7 @@ public class TodoController {
 
     @PutMapping("/{id}")
     public TodoItem updateTodoItem(@PathVariable String id, @RequestBody TodoItem updatedTodoItem) {
+        logger.info("Received request to update todo item with id: {}", id);
         Optional<TodoItem> todoItemOptional = todoService.getTodoItemById(id);
         if (todoItemOptional.isPresent()) {
             TodoItem todoItem = todoItemOptional.get();
