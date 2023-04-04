@@ -1,23 +1,18 @@
 package com.reicode.ToDoListApplication.model;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@DynamoDBTable(tableName = "todo")
+@AllArgsConstructor
+@DynamoDBTable(tableName = "todotable")
 public class TodoItem {
 
     @DynamoDBHashKey(attributeName = "id")
     private String id;
-
-    @DynamoDBAttribute(attributeName = "title")
-    private String title;
 
     @DynamoDBAttribute(attributeName = "description")
     private String description;
