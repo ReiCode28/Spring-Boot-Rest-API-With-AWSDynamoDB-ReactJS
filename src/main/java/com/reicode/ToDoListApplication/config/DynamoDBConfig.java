@@ -13,8 +13,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 
 @Configuration
-@EnableDynamoDBRepositories
-        (basePackages = "com.reicode.ToDoListApplication.repository")
+@EnableDynamoDBRepositories(basePackages = "com.reicode.ToDoListApplication.repository")
 public class DynamoDBConfig {
 
     @Value("${amazon.dynamodb.endpoint}")
@@ -28,10 +27,10 @@ public class DynamoDBConfig {
 
     @Bean
     public AmazonDynamoDB amazonDynamoDB(AWSCredentialsProvider awsCredentialsProvider) {
-        AmazonDynamoDB amazonDynamoDB
-                = AmazonDynamoDBClientBuilder.standard()
+        AmazonDynamoDB amazonDynamoDB = AmazonDynamoDBClientBuilder.standard()
                 .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(amazonDynamoDBEndpoint, "us-west-2"))
-                .withCredentials(awsCredentialsProvider).build();
+                .withCredentials(awsCredentialsProvider)
+                .build();
         return amazonDynamoDB;
     }
 
