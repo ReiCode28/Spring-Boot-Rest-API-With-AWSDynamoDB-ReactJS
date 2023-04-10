@@ -3,6 +3,7 @@ package com.reicode.ToDoListApplication.controller;
 import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
 import com.reicode.ToDoListApplication.model.TodoItem;
 import com.reicode.ToDoListApplication.service.TodoService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class TodoController {
 
 
     @PutMapping("/{id}")
-    public TodoItem updateTodoItem(@PathVariable String id, @RequestBody TodoItem updatedTodoItem) {
+    public TodoItem updateTodoItem(@PathVariable String id, @Valid @RequestBody TodoItem updatedTodoItem) {
         logger.info("Received request to update todo item with id: {}", id);
         Optional<TodoItem> todoItemOptional = todoService.getTodoItemById(id);
         if (todoItemOptional.isPresent()) {
@@ -59,9 +60,12 @@ public class TodoController {
     }
 
 
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTodoItem(@PathVariable String id) {
+        logger.info("Deleting todo item with ID: {}", id);
         todoService.deleteTodoItem(id);
+        logger.info("Todo item with ID {} deleted successfully", id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
